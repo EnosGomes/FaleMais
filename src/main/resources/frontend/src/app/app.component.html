@@ -1,0 +1,80 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<mat-toolbar class="mat-elevation-z4" color="primary" style="margin:0;padding:0">
+  <span class="app-spacer"></span>
+  <div class="text-align: center">
+    <span>Simulador {{ title }}</span>
+  </div>
+  <span class="app-spacer"></span>
+</mat-toolbar>
+<form #f="ngForm" (ngSubmit)="calcularMinutos(f)">
+  <mat-card style="text-align: center">
+    <mat-card-subtitle>Simule aqui o valor da ligação com e sem o plano: </mat-card-subtitle>
+    <mat-card-content style="text-align: center">
+
+      <div>
+        <mat-form-field>
+          <mat-select placeholder="Origem: " id="origem" name="origem" required [(ngModel)]="origem">
+            <mat-option *ngFor="let origem of origens" [value]="origem">
+              {{origem}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-select placeholder="Destino: " id="destino" name="destino" required [(ngModel)]="destino">
+            <mat-option *ngFor="let destino of destinos" [value]="destino">
+              {{destino}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput id="tempoLigacao" name="tempoLigacao" placeholder="Tempo da Ligação: "
+            [(ngModel)]="tempoLigacao" type="number" required>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-select placeholder="Plano: " id="plano" name="plano" required [(ngModel)]="plano">
+            <mat-option *ngFor="let plano of planos" [value]="plano">
+              {{plano.descricao}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Calcular</button>
+      <button mat-raised-button color="accent" (click)="limparFormulario()">Limpar</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
+
+<mat-card style="margin-top:5px;text-align: center" *ngIf="resultado">
+  <mat-card-subtitle>Resultado: </mat-card-subtitle>
+  <mat-card-content style="text-align: center">
+    <div>
+      <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="com_fale_mais">
+          <mat-header-cell *matHeaderCellDef> Com FaleMais </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.comPlano | moeda}} </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="sem_fale_mais">
+          <mat-header-cell *matHeaderCellDef> Sem FaleMais </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.semPlano | moeda}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+
+<router-outlet></router-outlet>

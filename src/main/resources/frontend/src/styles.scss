@@ -1,0 +1,33 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~@angular/material/theming';
+/* You can add global styles to this file, and also import other style files */
+
+$candy-app-primary: mat-palette($mat-teal);
+$candy-app-accent:  mat-palette($mat-amber);
+//$candy-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$candy-app-warn:    mat-palette($mat-red);
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Roboto, sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  background-color: #f5f5f5;
+  margin: 0px;
+}
+
+snack-bar-container.app-snackbar-erro {
+  background-color: mat-color($candy-app-warn);
+  border-color: mat-color($candy-app-warn);
+  color: #fff;
+}
+
+snack-bar-container.app-snackbar-ok {
+  background-color: mat-color($candy-app-primary);
+  border-color: mat-color($candy-app-primary);
+}
